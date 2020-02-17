@@ -1,6 +1,12 @@
+#include "box.hpp"
+#include<string>
+#include <iostream>
+using namespace std;
+
 struct Truck
+
 {
-    char driver[32];
+    string driver;
     int petrol;
     int money;
     int fullMileage;
@@ -18,7 +24,7 @@ struct Truck
 
     float cost()
     {
-
+        return 0.00;
     }
 };
 
