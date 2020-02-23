@@ -1,17 +1,18 @@
-struct Box
-{
-    int length;
-    int width;
-    int height;
+#pragma once
+#include<random>
+#include<iostream>
+using namespace std;
 
-    Box()
-    {
-        length = width = height = 0;
-    }
-
-
-    int volume()
-    {
-        return 0;
-    }
+class Box
+{   
+    public: 
+        Box();
+        int volume();
+    private:
+        int length;
+        int width;
+        int height;
+    
+    
+    
 };

@@ -1,3 +1,4 @@
+
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
@@ -17,8 +18,8 @@ int main()
 {
     TruckDelivery delivery;
     delivery.loadTrucks();
-    // delivery.calculateCost();
-    // delivery.makeJourney();
-    // delivery.unloadTrucks();
+    delivery.calculateCost();
+    delivery.makeJourney();
+    delivery.unloadTrucks();
     // return 0;
 }

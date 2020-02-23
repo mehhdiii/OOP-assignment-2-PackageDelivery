@@ -1,7 +1,9 @@
 #include "truck.hpp"
-struct Node{
-    Truck truck;
-    Node *next;
-    char a = 'a';
+class Node{
+    public:
+
+        Truck truck;
+        Node *next;
+    // char a = 'a';
 };
 

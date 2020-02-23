@@ -1,30 +1,23 @@
 #include "box.hpp"
-#include<string>
+
 #include <iostream>
 using namespace std;
 
-struct Truck
+class Truck
 
 {
-    string driver;
-    int petrol;
-    int money;
-    int fullMileage;
-    int emptyMileage;
-    Box *box;
+    public:
 
-    void load(int numBox)
-    {
+        string driver;
+        int petrol;
+        int money;
+        int fullMileage;
+        int emptyMileage;
+        Box *box;
 
-    }
-    void unload()
-    {
+        void load();
+        void unload();
+    // float cost();
 
-    }
-
-    float cost()
-    {
-        return 0.00;
-    }
 };
 
