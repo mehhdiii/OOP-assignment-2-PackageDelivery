@@ -6,8 +6,6 @@ using namespace std;
 class Truck
 
 {
-    public:
-
         string driver;
         float petrol;
         float money;
@@ -15,10 +13,23 @@ class Truck
         float emptyMileage;
         Box *box;
         int box_count;
-
+    public:
         void load();
         void unload();
-    // float cost();
+        void set_petrol(float);
+        void set_driver(string);
+        void set_money(float);
+        void set_fullMileage(float);
+        void set_emptyMileage(float);
+
+        //get functions:
+        float get_petrol();
+        string get_driver();
+        float get_money();
+        float get_fullMileage();
+        float get_emptyMileage();
+        int get_box_count();
+
 
 };
 

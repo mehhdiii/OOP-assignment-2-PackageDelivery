@@ -20,3 +20,6 @@ int Box::volume(){
     //returns the volume of the box
 }
 
+void Box::print_dim(){
+    cout << "Length: "<<length << " Width: "<<width<< " Height: "<< height<<endl;
+}
