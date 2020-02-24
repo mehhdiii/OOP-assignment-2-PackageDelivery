@@ -3,10 +3,10 @@
 void Truck::load(){
     //creating a list of boxes
     cout << "Loading Boxes...\n..." << endl;
-    box = new Box[12];
+    box_count = rand()%10+11;
+    box = new Box[box_count];
     cout << "boxes loaded\n" <<endl;
-    // for(int x=0; x<18;x++)
-    //     cout << "box volume: " << box[x].length <<endl;
+
 
 }
 void Truck::unload(){

@@ -9,7 +9,7 @@ class TruckDelivery{
     Node *head =NULL;
 public:
     string first_name, last_name; 
-    int number_data; //stores the value of the int type data in the file
+    float number_data; //stores the value of the number type data in the file
     void loadTrucks();
     void calculateCost();
     void makeJourney();

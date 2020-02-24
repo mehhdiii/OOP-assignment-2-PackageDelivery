@@ -9,11 +9,12 @@ class Truck
     public:
 
         string driver;
-        int petrol;
-        int money;
-        int fullMileage;
-        int emptyMileage;
+        float petrol;
+        float money;
+        float fullMileage;
+        float emptyMileage;
         Box *box;
+        int box_count;
 
         void load();
         void unload();

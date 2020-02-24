@@ -6,8 +6,8 @@ using namespace std;
 class Box
 {   
     public: 
-        Box();
-        int volume();
+        Box(); //constructor
+        int volume(); //function to store the value of the volume of a box;
     private:
         int length;
         int width;

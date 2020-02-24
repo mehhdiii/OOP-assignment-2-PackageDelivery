@@ -3,7 +3,6 @@
 Node* addNode(){ //function which allocates a dynamic memory for a new node
     Node * truck_info_adress = new Node; //creating a new node and storing its adress in head
     return truck_info_adress;
-
 }
 
 void TruckDelivery::loadTrucks(){
@@ -32,16 +31,10 @@ void TruckDelivery::loadTrucks(){
                     file >> first_name;
                     file >> last_name;
                     (truck_info->truck).driver = first_name+" "+last_name; //assign the driver name to the class objects variable
-                    // count_lines+=1;
-                    // cout << "eof value: "<<file.eof() << endl;
                     cout << "Driver: " << truck_info->truck.driver<< endl;
                 }
                 else if (count_lines <5){
                     file >> number_data; //stores the incoming data from the input stream into the variable
-                    // cout << number_data<< endl;
-                    // cout << number_data<< endl;
-                    // count_lines+=1;
-
                     //checking where to put the value of the incoming int
                     switch (count_lines)
                     {
@@ -72,26 +65,19 @@ void TruckDelivery::loadTrucks(){
             
             
             //building the linked list
-            if (head==NULL){
+            if (head==NULL){//if null then the node is the first element of the linked list
 
                 head= truck_info;
                 truck_info->next = NULL;
 
                 // cout << head->truck.driver << endl;
-                
-
-
-                
             }
             else{
                 //adding the node to the linked list
                 truck_info->next = head;
                 // cout << "the last element was: "<<truck_info->next->truck.driver << endl;
                 head = truck_info;
-                
             }
-                  
-            
         }
         cout << "Loading complete!\n" << endl;
     }
@@ -102,18 +88,23 @@ void TruckDelivery::calculateCost(){
     float empty_fuel;
     float loaded_fuel;
     int distance = 60;
-    float total_fuel;
+    float total_fuel_with_money;
+    float req_petrol_with_money;
+    float spent_money;
     while(node!=NULL){ //until the node value is null, you have not reached the end of linked list
         // cout << "driver: " << node->truck.driver << endl; //output the driver name
-        total_fuel = node->truck.petrol + (node->truck.money)/2.73;
-        node->truck.petrol = total_fuel; //refuling the truck 
         
+        //Rule followed: if the tank cannot be filled to full extent, the truck cannot make journey!!
+        total_fuel_with_money = (node->truck.money)/2.73;
+        req_petrol_with_money = 50-node->truck.petrol;
+        spent_money = req_petrol_with_money*2.73;
+        //consumtion of petrol during journey
         empty_fuel = 60/(node->truck.emptyMileage);
         loaded_fuel = 60/(node->truck.fullMileage);
         // cout <<"total fuel: "<< total_fuel << endl;
         // cout << "required fuel: " << empty_fuel+loaded_fuel<< endl;
 
-        if(total_fuel<(empty_fuel+loaded_fuel) || total_fuel<50){//if true then remove from list
+        if(total_fuel_with_money < req_petrol_with_money){//if true then remove from list
 
             cout << node->truck.driver<< ": failed"<< endl;
             node->truck.unload(); //unloading the truck
@@ -125,7 +116,10 @@ void TruckDelivery::calculateCost(){
         else{
             //pass
             cout << node->truck.driver<< ": Pass"<< endl;
-            prev_node= node;
+            //update his petrol stats and money:
+            node->truck.money-=spent_money;
+            node->truck.petrol+=req_petrol_with_money;
+            prev_node = node;
             node = node->next; //go to the next node
         }
 
@@ -156,9 +150,11 @@ void TruckDelivery::unloadTrucks(){
     Node *node = head; // stores the value of current node
     Node *temp;
     cout << "\nUnloading all trucks..."<< endl;
+    int len_of_box; //length of the array of boxes
     while(node!=NULL){
         temp = node->next;
         cout<< "truck driver: "<< node->truck.driver<<endl;
+
         if (temp!=NULL){//THERE IS A NEXT NODE: THEN
         //storing all data to the output file:
             file << node->truck.driver;
@@ -179,7 +175,12 @@ void TruckDelivery::unloadTrucks(){
 
 
         //unload the truck before deleting
-        cout << "volume of box: "<< node->truck.box[0].volume() << endl; // same volume for all boxes in the array
+        
+        
+        for(int i= 0; i<node->truck.box_count; i++){//printing truck volume
+            cout << "volume of box #"<< i<<": "<< node->truck.box[i].volume() << endl; // 
+        }
+        
         node->truck.unload();
         delete node;
         node = temp;
@@ -197,13 +198,13 @@ void TruckDelivery::makeJourney(){
     int total_feul_available;
     int journey_feul;
     while(n!=NULL){
-        cout <<"Truck of " << n->truck.driver << "is on the way." <<endl;
-        total_feul_available = n->truck.petrol; //the feul currently in truck 
-        journey_feul = 60/(n->truck.fullMileage )+ 60/(n->truck.emptyMileage); //feul spent in journey
+        cout <<"Truck of " << n->truck.driver << " is on the way." <<endl;
+        total_feul_available = n->truck.petrol; //the feul currently in tank 
+        journey_feul = 60/(n->truck.fullMileage)+ 60/(n->truck.emptyMileage); //feul spent in journey
 
         //updating the feul:
-        n->truck.petrol = total_feul_available - journey_feul;
-        cout <<"Truck of " << n->truck.driver << "has reached its destination\n" <<endl;
+        n->truck.petrol-=journey_feul;
+        cout <<"Truck of " << n->truck.driver << " has reached its destination\n" <<endl;
         n = n->next;
     }
 
